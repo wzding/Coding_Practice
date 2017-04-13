@@ -14,7 +14,7 @@ class Solution(object):
         self.min = float('inf')
         self.previous = float('inf')
             
-        def inorder(root):
+        def inorder(root): # left - root - right
             if root:
                 inorder(root.left)
                 self.min = min(self.min, abs(root.val - self.previous))
