@@ -10,15 +10,13 @@ Seq include: Range, ArrayBuffer, List
 4 example
 */
 
-
+//------------------------------------------------------------------
 // range
 1 to 10
 1 until 10
 1.to(10)
 1.until(10)
-
-
-
+//------------------------------------------------------------------
 // list is immutable, it has head and tail
 // :: to combine element with list
 val list = List(1,2,3,4)
@@ -37,9 +35,7 @@ def decorate(l:List[Int], prefix: String): Unit ={
 }
 decorate(List(3,6,7,4), "+")
 decorate(List(), "+")
-
-
-
+//------------------------------------------------------------------
 // LinkedList is mutable, typically use elem and next rather than head and tail though the values are the same
 val l=scala.collection.mutable.LinkedList(1,2,3,4,5)
 l.elem
@@ -66,9 +62,7 @@ while(currentList1 != Nil && currentList1.next != Nil){
   currentList1.elem = currentList1.elem * 2
 }
 list3
-
-
-
+//------------------------------------------------------------------
 //set no duplicates, no order
 val s = Set(1,2,3)
 s + 4
@@ -82,9 +76,7 @@ s2
 scala.collection.mutable.LinkedHashSet[Int](1,5,3,4,7,2)
 // sorted set
 scala.collection.mutable.SortedSet.apply("banana", "apply", "orange")
-
-
-
+//------------------------------------------------------------------
 // collection + function -> high-order function: receive other function as input
 List("Leo", "Emma", "Jen").map("name is " + _)
 List("Hello World", "You Me").flatMap(_.split(" "))
@@ -96,3 +88,4 @@ List("Leo","Jen", "Peter").zip(List(100, 85, 94))
 //val lines2 = scala.io.Source.fromFile("test02.txt").mkString
 val lines = List("hello world", "hello Emma")
 lines.flatMap(_.split(" ")).map((_, 1)).map(_._2).sum
+//------------------------------------------------------------------

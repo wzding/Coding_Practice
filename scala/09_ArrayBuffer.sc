@@ -1,8 +1,7 @@
 /*
 Array & ArrayBuffer
 */
-
-
+//------------------------------------------------------------------
 // to use an array that have changable length
 import scala.collection.mutable.ArrayBuffer
 
@@ -22,3 +21,4 @@ var b_a = b.toArray
 b_a
 var a_b = b_a.toBuffer
 a_b
+//------------------------------------------------------------------

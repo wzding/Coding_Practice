@@ -13,21 +13,16 @@ why not replace Java: lots of applications, such as Spring, Lucene, Activiti, Ha
 8. Currying function
 9. return different from Java
 */
-
-
+//------------------------------------------------------------------
 // independent function
 def sayHello(name:String){println("Hello, " + name)}
 // add space and _ when define a value as a function
 val sayHelloFunc = sayHello _
 sayHelloFunc("leo")
-
-
-
+//------------------------------------------------------------------
 // anonymous function syntax
 val sayHelloFunc1 = (name: String) => println("Hello, " + name)
-
-
-
+//------------------------------------------------------------------
 //high-order function
 val sayHelloFunc2 = (name: String) => println("Hello, " + name)
 def greeting(func: (String) => Unit, name: String){func(name)}
@@ -64,9 +59,7 @@ Array(1,2,3,4,5).map(2 * _)
 (1 to 9).reduceLeft(_ * _)
 //sortWith
 Array(3, 2, 5, 4, 10, 1).sortWith(_ < _)
-
-
-
+//------------------------------------------------------------------
 // Closure
 def getGreetingFunc1(msg: String) = (name: String) => println(msg + "," + name)
 // msg can be used beyond its scope --> closure
@@ -74,9 +67,7 @@ val greetingFuncHello = getGreetingFunc1("hello")
 greetingFuncHello("leo")
 val greetingFuncHi = getGreetingFunc1("hi")
 greetingFuncHi("leo")
-
-
-
+//------------------------------------------------------------------
 //SAM single abstract method, transfer SAM to scala function
 import javax.swing._
 import java.awt.event._
@@ -99,9 +90,7 @@ implicit def getActionListener(actionProcessFunc:(ActionEvent)=>Unit) = new Acti
   }
 }
 button.addActionListener((event: ActionEvent)=>println("Click Me!"))
-
-
-
+//------------------------------------------------------------------
 // Currying function
 def sum(a: Int, b: Int) = a + b
 sum(1,1)
@@ -111,9 +100,7 @@ sum2(1)(1)
 
 def sum3(a:Int)(b:Int) = a + b
 sum3(1)(1)
-
-
-
+//------------------------------------------------------------------
 //return - unanonymous function use anonymous function - must specify return type
 //normally the last line is the returned value
 def greeting2(name: String)={
@@ -122,4 +109,4 @@ def greeting2(name: String)={
   }
   sayHello(name)
 }
-
+//------------------------------------------------------------------
