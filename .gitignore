@@ -1,4 +1,5 @@
 .DS_Store
-
+scala/.idea/*
+scala/untitled/*
 .ipynb_checkpoints/
 
