@@ -21,6 +21,7 @@ on most CPUs and GPUs.
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 import numpy as np
+from helper import batches
 
 learning_rate = 0.001
 n_input = 784  # MNIST data input (img shape: 28*28)
@@ -63,25 +64,6 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 # Set batch size
 batch_size = 128
 assert batch_size is not None, 'You must set the batch size'
-
-def batches(batch_size, features, labels):
-    """
-    Create batches of features and labels
-    :param batch_size: The batch size
-    :param features: List of features
-    :param labels: List of labels
-    :return: Batches of (Features, Labels)
-    """
-    assert len(features) == len(labels)
-    outout_batches = []
-
-    sample_size = len(features)
-    for start_i in range(0, sample_size, batch_size):
-        end_i = start_i + batch_size
-        batch = [features[start_i:end_i], labels[start_i:end_i]]
-        outout_batches.append(batch)
-
-    return outout_batches
 
 
 init = tf.global_variables_initializer()

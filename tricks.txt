@@ -1,3 +1,7 @@
+Conda
+conda env create -f environment.yml
+
+————————————————————————————————————————————————————————————————————————————————————
 
 Docker
 Install docker
@@ -14,6 +18,9 @@ docker exec -it <containerID> /bin/bash
 
 Remove image:
 	Docker rmi -f <imageID>
+
+————————————————————————————————————————————————————————————————————————————————————
+
 Hdfs
 Load data to cluster:
 scp test.txt wding@int-ambari01.escm.co:/calceta
@@ -27,8 +34,14 @@ sudo -u hdfs hdfs dfs -mkdir /data/datalake/flex/feed/TRIGGER/INDEPENDENT_DEMAND
 Check exsiting file
 hdfs dfs -ls /
 Absolute path: hdfs dfs -ls hdfs://int-ambari01.escm.co:8020/data/datalake/triggers/flextronics/DEMAND
+
+————————————————————————————————————————————————————————————————————————————————————
+
 Git
 Git clone -b <branch> <url>
+
+————————————————————————————————————————————————————————————————————————————————————
+
 Jupyter
 Ssh
 https://coderwall.com/p/ohk6cg/remote-access-to-ipython-notebooks-via-ssh
@@ -52,8 +65,13 @@ Close an open port:
 sudo lsof -i :5006
 sudo kill -9 PID
 
+————————————————————————————————————————————————————————————————————————————————————
+
 Nohup
 Nohup python3 <file.py> &
+
+————————————————————————————————————————————————————————————————————————————————————
+
 Spark
 Run script on cluster:
 sudo -u hdfs /usr/bin/spark-submit --master yarn --deploy-mode cluster sample.py
@@ -73,7 +91,7 @@ Running Spark submit
 export PYSPARK_PYTHON=/usr/bin/python3
 export PYSPARK_DRIVER_PYTHON=/usr/bin/python3
 
-
+————————————————————————————————————————————————————————————————————————————————————
 
 Virtual environment
 PATH=$WORKSPACE/venv/bin:/usr/local/bin:$PATH
