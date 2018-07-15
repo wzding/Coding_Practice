@@ -1,0 +1,97 @@
+
+Docker
+Install docker
+docker build -t computeeta .
+docker images
+docker run -i -t <imageID>
+docker run -i -p 8080:12345 <imageID>
+
+curl http://localhost:<port>/health
+If not working: go inside the container
+	docker run -i -t <imageID> /bin/bash
+docker ps | grep computeeta
+docker exec -it <containerID> /bin/bash
+
+Remove image:
+	Docker rmi -f <imageID>
+Hdfs
+Load data to cluster:
+scp test.txt wding@int-ambari01.escm.co:/calceta
+sudo -u hdfs hdfs dfs -put Elem_20180508 /data/datalake/triggers/flextronics
+sudo -u hdfs hdfs dfs -copyFromLocal test.txt /data/datalake/triggers/flex
+Remove
+sudo -u hdfs hdfs dfs -rm /data/datalake/triggers/flextronics/*.xlsx
+sudo -u hdfs hdfs dfs -rm -r /data/datalake/triggers/flextronics/test
+Mkdir
+sudo -u hdfs hdfs dfs -mkdir /data/datalake/flex/feed/TRIGGER/INDEPENDENT_DEMAND/SNAPSHOT
+Check exsiting file
+hdfs dfs -ls /
+Absolute path: hdfs dfs -ls hdfs://int-ambari01.escm.co:8020/data/datalake/triggers/flextronics/DEMAND
+Git
+Git clone -b <branch> <url>
+Jupyter
+Ssh
+https://coderwall.com/p/ohk6cg/remote-access-to-ipython-notebooks-via-ssh
+remote_user@remote_host$ jupyter notebook --no-browser --port=8889
+local_user@local_host$ ssh -N -f -L localhost:4444:localhost:8889 remote_user@remote_host
+Specify port: ssh -N -f -L localhost:1234:localhost:8888 -p 55555 emma@24.6.218.37
+To close the SSH tunnel on the local machine, look for the process and kill it manually:
+jupyter notebook list
+fuser 8888/tcp
+local_user@local_host$ ps aux | grep localhost:8889
+local_user 18418  0.0  0.0  41488   684 ?        Ss   17:27   0:00 ssh -N -f -L localhost:8888:localhost:8889 remote_user@remote_host
+local_user 18424  0.0  0.0  11572   932 pts/6    S+   17:27   0:00 grep localhost:8889
+local_user@local_host$ kill -15 18418
+
+Fix kernel error
+jupyter kernelspec list
+rm -r <the above path>
+Ls
+Count number of files: ls directory | wc -l
+Close an open port:
+sudo lsof -i :5006
+sudo kill -9 PID
+
+Nohup
+Nohup python3 <file.py> &
+Spark
+Run script on cluster:
+sudo -u hdfs /usr/bin/spark-submit --master yarn --deploy-mode cluster sample.py
+sudo -u hdfs /usr/bin/spark-submit --master local[*] process-actual-demand_1.py --file_path "HistoricalSalesOrderShipment/fake_old.csv" --output_path "test"
+spark-submit --master yarn --deploy-mode cluster --conf spark.yarn.submit.waitAppCompletion=true --num-executors 2 --executor-cores 14 --driver-memory 3g --executor-memory 45g --properties-file /opt/elementum/spark-defaults-int.conf s3://elementum-r9-stage/calceta/spark/src/es_data_extraction_spark/run_all_jenkins_spark.py 20180610 20180611
+step function
+aws emr add-steps --region us-east-1 --cluster-id j-1I76SLBICAZWW  --steps Type=spark,Name=spark_calceta_ml,Args=[--master,yarn,--deploy-mode,cluster,--conf,spark.yarn.submit.waitAppCompletion=true,--num-executors,2,--executor-cores,14,--driver-memory,3g,--executor-memory,45g,--properties-file,/opt/elementum/spark-defaults-int.conf,s3://elementum-r9-stage/calceta/spark/src/es_data_extraction_spark/run_all_jenkins_spark.py,20180501,20180502,calceta/spark/test_0612_airflow/],ActionOnFailure=CONTINUE
+Pyspark
+Pip install pyspark
+python3 -m pip install ipykernel
+python3 -m ipykernel install --user
+Running jupyter notebook:
+export PYSPARK_DRIVER_PYTHON=ipython3
+export PYSPARK_DRIVER_PYTHON_OPTS='notebook'
+Then type pyspark --master local[*]  in terminal: run notebook
+Running Spark submit
+export PYSPARK_PYTHON=/usr/bin/python3
+export PYSPARK_DRIVER_PYTHON=/usr/bin/python3
+
+
+
+Virtual environment
+PATH=$WORKSPACE/venv/bin:/usr/local/bin:$PATH
+
+if [ ! -f verify_calcETA_data/bin/activate ]; then
+  echo "Virtal Env. not found, creating..."
+  virtualenv --python=/usr/bin/python3 --no-site-packages verify_calcETA_data
+fi
+source verify_calcETA_data/bin/activate
+which pip
+
+pip install --upgrade pip
+pip install -U --force numpy
+pip install -U --force scipy==0.18.1
+pip install elasticsearch
+pip install requests
+pip install -U --force pandas==0.19.2
+pip install boto
+pip install boto3
+pip install -U --force sklearn
+pip install pyspark
