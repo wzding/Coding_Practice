@@ -14,7 +14,6 @@ with tf.Session() as sess:
     output = sess.run(hello_constant)
     print(output)
 
-
 """
 What if you want to use a non-constant? This is where tf.placeholder() and
 feed_dict come into place.
@@ -22,3 +21,7 @@ tf.placeholder() returns a tensor that gets its value from data passed to the
 tf.session.run() function, allowing you to set the input right before the
 session runs.
 """
+x = tf.placehoder(tf.string)
+with tf.Session() as sess:
+	output = sess.run(x, feed_dict={x:"Hello Emma"})
+	
