@@ -66,7 +66,7 @@ with tf.Session() as sess:
                 labels: batch_labels,
                 learning_rate: learn_rate}
             sess.run(optimizer, feed_dict=train_feed_dict)
-            print_epoch_stats(epoch_i, sess, batch_features, batch_labels)
+        print_epoch_stats(epoch_i, sess, batch_features, batch_labels)
     test_accuracy = sess.run(
         accuracy,
         feed_dict={features: test_features, labels: test_labels})
