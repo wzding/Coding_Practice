@@ -93,6 +93,10 @@ export PYSPARK_DRIVER_PYTHON=/usr/bin/python3
 
 ————————————————————————————————————————————————————————————————————————————————————
 
+tar -xzf file.tar.gz
+
+————————————————————————————————————————————————————————————————————————————————————
+
 Virtual environment
 PATH=$WORKSPACE/venv/bin:/usr/local/bin:$PATH
 
