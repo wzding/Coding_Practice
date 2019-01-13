@@ -20,26 +20,67 @@ Remove image:
 	Docker rmi -f <imageID>
 
 ————————————————————————————————————————————————————————————————————————————————————
+# find file
+find . -iname 'spark-defaults.conf'
+
+# get ip addr
+ifconfig  -a | grep 10
+
+————————————————————————————————————————————————————————————————————————————————————
 
 Hdfs
+
+Copy data from hfs to ambari:
+sudo -u hdfs dfs -copyToLocal /data/datalake/flex/normalized/TRIGGER temp
+
+Make a zip 
+zip -r temp.zip temp/ 
+
+Copy data to local
+scp wding@int-ambari01.escm.co:~/temp.zip .
+
+Copy data to ambari
+scp temp.zip wding@stage-ambari01.escm.co:~/temp
+
+Unzip 
+unzip temp.zip
+
+Load data to cluster:
+sudo -u hdfs hdfs dfs -put temp /data/datalake/triggers/flextronics/…
+
+
+scp test.txt wding@int-ambari01.escm.co:/temp
+
+Put data to hfs:
+sudo -u hdfs hdfs dfs -put Elem_20180508 /data/datalake/triggers/flextronics
+
+
 Load data to cluster:
 scp test.txt wding@int-ambari01.escm.co:/calceta
+
 sudo -u hdfs hdfs dfs -put Elem_20180508 /data/datalake/triggers/flextronics
 sudo -u hdfs hdfs dfs -copyFromLocal test.txt /data/datalake/triggers/flex
+
 Remove
 sudo -u hdfs hdfs dfs -rm /data/datalake/triggers/flextronics/*.xlsx
 sudo -u hdfs hdfs dfs -rm -r /data/datalake/triggers/flextronics/test
+
 Mkdir
 sudo -u hdfs hdfs dfs -mkdir /data/datalake/flex/feed/TRIGGER/INDEPENDENT_DEMAND/SNAPSHOT
+
+sudo -u hdfs hdfs dfs -cp dir1 dir2
+
 Check exsiting file
 hdfs dfs -ls /
 Absolute path: hdfs dfs -ls hdfs://int-ambari01.escm.co:8020/data/datalake/triggers/flextronics/DEMAND
 
+Copy
+hdfs dfs -copyToLocal /data/datalake/flex/normalized/TRIGGER .
 ————————————————————————————————————————————————————————————————————————————————————
 
 Git
 Git clone -b <branch> <url>
-
+git checkout -b <branch>
 ————————————————————————————————————————————————————————————————————————————————————
 
 Jupyter
@@ -65,6 +106,19 @@ Close an open port:
 sudo lsof -i :5006
 sudo kill -9 PID
 
+Fix package installation error
+
+import sys
+sys.executable
+sys.version
+sys.path
+
+import numpy
+numpy.__path__
+
+!source activate py3;pip install scikit-surprise
+!{sys.executable} -m pip install scikit-surprise
+
 ————————————————————————————————————————————————————————————————————————————————————
 
 Nohup
@@ -83,9 +137,20 @@ Pyspark
 Pip install pyspark
 python3 -m pip install ipykernel
 python3 -m ipykernel install --user
+
 Running jupyter notebook:
 export PYSPARK_DRIVER_PYTHON=ipython3
 export PYSPARK_DRIVER_PYTHON_OPTS='notebook'
+
+# Set SPARK_MEM if it isn't already set since we also use it for this process
+SPARK_MEM=${SPARK_MEM:-2048m}
+export SPARK_MEM
+
+# Set JAVA_OPTS to be able to load native libraries and to set heap size
+JAVA_OPTS="$OUR_JAVA_OPTS"
+JAVA_OPTS="$JAVA_OPTS -Djava.library.path=$SPARK_LIBRARY_PATH"
+JAVA_OPTS="$JAVA_OPTS -Xms$SPARK_MEM -Xmx$SPARK_MEM"
+
 Then type pyspark --master local[*]  in terminal: run notebook
 Running Spark submit
 export PYSPARK_PYTHON=/usr/bin/python3
