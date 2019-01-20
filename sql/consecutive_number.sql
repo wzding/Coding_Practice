@@ -27,14 +27,13 @@ select distinct jobid
 from (select jobid,
       @counter := if(@prev = jobid, @counter := @counter + 1, 1) as cnt,
       @prev := jobid
-     from logs,
-      (select @counter := 1,
-      @prev := Null) temp) counts
+      from logs,
+      (select @counter := 1, @prev := Null) init) counts
 where cnt >= 2
+
 /* or set variable first */
 set @counter := 1;
 set @prev := Null;
-
 select distinct jobid
 from (select jobid,
       @counter := if(@prev = jobid, @counter := @counter + 1, 1) as cnt,

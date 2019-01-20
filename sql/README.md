@@ -5,7 +5,11 @@ SQL Server, Oracle, MySQL, DB2, and PostgreSQL.
 # Categorization
 
 ## local variable
-*  consecutive_number.sql
+* consecutive_number.sql
+* prime_number.sql
+
+# union
+* Weather_Observation_Station_5.sql
 
 ## self join
 * self_join.sql
@@ -24,6 +28,12 @@ SQL Server, Oracle, MySQL, DB2, and PostgreSQL.
 
 # row_number + dense_rank (only for SQL Server and PostgreSQL)
 * top_k_sales.sql
+
+# complicated logic
+* 15_Days_of_Learning_SQL.sql
+
+# regexp
+* Weather_Observation_Station_6.sql
 
 # Resources
 * SQLZOO: Tutorial exercises completed from http://sqlzoo.net/wiki/SQL_Tutorial
