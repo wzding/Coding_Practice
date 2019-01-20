@@ -5,6 +5,11 @@ SQL Server, Oracle, MySQL, DB2, and PostgreSQL.
 # Categorization
 
 ## local variable
+
+Note that if set local variable in front, such as set @r1 := 0, : can be ignored.
+But if set in a table, : can not be ignored. It's better to just keep : all the
+time.
+
 * consecutive_number.sql
 * prime_number.sql
 
@@ -29,7 +34,7 @@ SQL Server, Oracle, MySQL, DB2, and PostgreSQL.
 
 # pivot_table
 * count_User_Items.sql
-* 
+* Occupations.sql
 
 # row_number + dense_rank (only for SQL Server and PostgreSQL)
 * top_k_sales.sql
