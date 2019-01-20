@@ -24,6 +24,7 @@ create view User_Items_Extended_Pivot as (
   from User_Items_Extended
   group by Cust_Names
 );
+
 create view User_Items_Extended_Pivot_Pretty as (
   select
     Cust_Names,

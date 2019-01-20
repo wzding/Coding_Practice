@@ -22,9 +22,14 @@ SQL Server, Oracle, MySQL, DB2, and PostgreSQL.
 
 ## case when + join
 * music_action.sql
+* type_of_triangle.sql
+
+## concat
+* The_PADS.sql
 
 # pivot_table
-* pivot_table.sql
+* count_User_Items.sql
+* 
 
 # row_number + dense_rank (only for SQL Server and PostgreSQL)
 * top_k_sales.sql
