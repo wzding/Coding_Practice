@@ -4,7 +4,7 @@ SQL Server, Oracle, MySQL, DB2, and PostgreSQL.
 
 # Categorization
 
-## local variable
+## local variable + information_schema.tables
 
 Note that if set local variable in front, such as set @r1 := 0, : can be ignored.
 But if set in a table, : can not be ignored. It's better to just keep : all the
@@ -12,6 +12,9 @@ time.
 
 * consecutive_number.sql
 * prime_number.sql
+
+# median
+* Weather_Observation_Station_20.sql
 
 # union
 * Weather_Observation_Station_5.sql
@@ -24,12 +27,11 @@ time.
 
 ## Top numbers
 * kth_highest_sales.sql
-* 
+* Top_Earners.sql
 
 ## case when + join
 * music_action.sql
 * type_of_triangle.sql
-*
 
 ## concat
 * The_PADS.sql
