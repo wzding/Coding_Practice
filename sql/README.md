@@ -27,7 +27,10 @@ time.
 
 ## Top numbers
 * kth_highest_sales.sql
-* Top_Earners.sql
+* Top_Earners.sql (count of max)
+* Contest_Leaderboard.sql (sum of max)
+* Ollivander's_Inventory.sql (other attributes with min)
+# Challenges.sql (max of count)
 
 ## case when + join
 * music_action.sql
