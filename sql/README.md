@@ -4,6 +4,9 @@ SQL Server, Oracle, MySQL, DB2, and PostgreSQL.
 
 # Categorization
 
+# creation
+* create_table.sql
+
 ## local variable + information_schema.tables
 
 Note that if set local variable in front, such as set @r1 := 0, : can be ignored.
@@ -46,8 +49,12 @@ time.
 * count_User_Items.sql
 * Occupations.sql
 
-# row_number + dense_rank (only for SQL Server and PostgreSQL)
-* top_k_sales.sql
+# window function
+* cume_dist.sql
+* first_last_value.sql (first_value + last_value)
+* rank.sql (row_number + dense_rank + rank)
+* lag.sql (lag + )
+* top_k_sales.sql (row_number + dense_rank)
 
 # complicated logic
 * 15_Days_of_Learning_SQL.sql

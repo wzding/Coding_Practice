@@ -1,8 +1,6 @@
 /*
 partion by used in window function is different from group by
 https://stackoverflow.com/questions/2404565/sql-server-difference-between-partition-by-and-group-by
-
-NOTE this is for sql server NOT MySQL
 top k products -- return exact k rows
 */
 with r as (
