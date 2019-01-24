@@ -12,12 +12,15 @@ time.
 
 * consecutive_number.sql
 * prime_number.sql
+* Projects.sql
+* Draw_The_Triangle.sql
 
 # median
 * Weather_Observation_Station_20.sql
 
 # union
 * Weather_Observation_Station_5.sql
+* Symmetric_Pairs.sql
 
 ## self join
 * self_join.sql
@@ -48,6 +51,7 @@ time.
 
 # complicated logic
 * 15_Days_of_Learning_SQL.sql
+* Interviews.sql (join + left join)
 
 # regexp
 * Weather_Observation_Station_6.sql

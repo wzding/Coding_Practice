@@ -12,19 +12,21 @@ SELECT
     submission_date,
 (SELECT
  COUNT(distinct hacker_id)
- FROM Submissions hackerCount
- WHERE hackerCount.submission_date = dates.submission_date
+ FROM Submissions s1
+ WHERE s1.submission_date = dates.submission_date
+ -- made at least  submission each day
  AND (SELECT
-      COUNT(distinct submissionCount.submission_date)
-      FROM Submissions submissionCount
-      WHERE submissionCount.hacker_id = hackerCount.hacker_id
-      AND submissionCount.submission_date < dates.submission_date)
-                = dateDIFF(dates.submission_date , '2016-03-01')
+      COUNT(distinct s2.submission_date)
+      FROM Submissions s2
+      WHERE s2.hacker_id = s1.hacker_id
+      AND s2.submission_date < dates.submission_date)
+                = datediff(dates.submission_date , '2016-03-01')
      ) ,
+-- made maximum number of submissions each day
 (SELECT
     hacker_id
-    FROM submissions hackerList
-    WHERE hackerList.submission_date = dates.submission_date
+    FROM submissions s3
+    WHERE s3.submission_date = dates.submission_date
     GROUP BY hacker_id
     ORDER BY count(submission_id) DESC , hacker_id limit 1) as topHack,
 (SELECT

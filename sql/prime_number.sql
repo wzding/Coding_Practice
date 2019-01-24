@@ -1,6 +1,6 @@
 /*
 Write a query to print all prime numbers less than or equal to .
-Print your result on a single line, and use the ampersand () character as
+Print your result on a single line, and use the ampersand (&) character as
 your separator (instead of a space).
 
 why use information_schema.tables twice?
