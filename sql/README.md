@@ -51,9 +51,9 @@ time.
 
 # window function
 * cume_dist.sql
-* first_last_value.sql (first_value + last_value)
-* rank.sql (row_number + dense_rank + rank)
-* lag.sql (lag + )
+* first_last_value.sql (first_value + last_value + NTH_VALUE)
+* rank.sql (row_number + dense_rank + rank + percent_rank)
+* lag_lead.sql (lag + lead)
 * top_k_sales.sql (row_number + dense_rank)
 
 # complicated logic

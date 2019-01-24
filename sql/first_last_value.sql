@@ -89,3 +89,15 @@ SELECT
  ) most_overtime_employee
 FROM
     overtime;
+
+-- NTH_VALUE over the result set
+SELECT
+    employee_name,
+    salary,
+    NTH_VALUE(employee_name, 2) OVER  (
+        ORDER BY salary DESC
+    ) second_highest_salary
+FROM
+    basic_pays;
+
+-- NTH_VALUE over partition Example
