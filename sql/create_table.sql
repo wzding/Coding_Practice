@@ -6,7 +6,7 @@ CREATE TABLE overtime (
 );
 
 INSERT INTO overtime(employee_name, department, hours)
-VALUES('Diane Murphy','Accounting',37),
+VALUES ('Diane Murphy','Accounting',37),
 ('Mary Patterson','Accounting',74),
 ('Jeff Firrelli','Accounting',40),
 ('William Patterson','Finance',58),

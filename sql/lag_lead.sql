@@ -60,15 +60,31 @@ user_id | 6684 |  this is id of the user
 page  |  home_page |  the page visited
 unix_timestamp |  1451640067 |  unix timestamp in seconds
 */
+CREATE TABLE t1 (
+    user_id INT NOT NULL,
+    page VARCHAR(10) NOT NULL,
+    unix_timestamp INT NOT NULL
+);
+
+insert into t1(user_id, page, unix_timestamp)
+values (1, "home", 1451640067),
+(1, "home", 1451640068),
+(2, "home", 1451640028),
+(2, "home", 1451640090),
+(2, "home", 1451640030),
+(3, "home", 1451640090),
+(4, "home", 1451640090);
+
 select user_id,
-  unix_timestamp - previous_timestamp
-from (
+  unix_timestamp - previous_time as diff
+  from (
   select user_id,
-  unix_timestamp,
-  lag(unix_timestamp, 1) over (
-    partition by user_id order by unix_timestamp) as previous_timestamp,
-  row_number() over (
-    partition by user_id order by unix_timestamp desc) as row,
-  from table) temp
-where row = 1
-group by user_id
+    unix_timestamp,
+    lag(unix_timestamp, 1) over (
+    partition by user_id order by unix_timestamp) as previous_time,
+    row_number() over (
+    partition by user_id order by unix_timestamp desc) as row_num
+    from t1
+    ) temp
+  where row_num = 1
+  order by user_id
