@@ -38,7 +38,8 @@ time.
 * Top_Earners.sql (count of max)
 * Contest_Leaderboard.sql (sum of max)
 * Ollivander's_Inventory.sql (other attributes with min)
-* Challenges.sql (max of count)
+* Challenges.sql (max of count  注意不能直接用max(count( )) )
+* max_min_country_first_last_user.sql
 
 ## case when + join
 * music_action.sql
