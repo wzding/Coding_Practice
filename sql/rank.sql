@@ -1,15 +1,8 @@
 CREATE TABLE t (
     val INT
 );
-
 INSERT INTO t(val)
 VALUES(1),(2),(2),(3),(4),(4),(5);
-
-
-SELECT
-    *
-FROM
-    t;
 
 /*
 row_number: Assigns a sequential integer to every row within its partition
@@ -57,3 +50,37 @@ SELECT
     ) group
 FROM
     t;
+
+/*
+Write a query that returns for each user on which day they became a power user.
+That is, for each user, on which day they bought the 10th item.
+*/
+CREATE TABLE t (
+    user_id INT NOT NULL,
+    p_time TIMESTAMP NOT NULL
+);
+
+INSERT INTO t(user_id, p_time)
+VALUES (1,'2014-10-31 16:16:12'),
+(1,'2014-11-30 16:16:12'),
+(1,'2014-12-30 16:16:12'),
+(1,'2014-01-30 16:16:12'),
+(1,'2014-02-24 16:16:12'),
+(1,'2014-02-10 16:16:12'),
+(2,'2014-12-30 16:16:12'),
+(2,'2014-11-30 16:16:12'),
+(2,'2014-09-30 16:16:12'),
+(2,'2014-08-30 16:16:12'),
+(3,'2014-10-30 16:16:12'),
+(3,'2014-11-30 16:16:12'),
+(3,'2014-12-30 16:16:12'),
+(3,'2014-10-30 16:16:12'),
+(3,'2014-01-30 16:16:12');
+
+select user_id, p_time
+from(
+  select user_id, p_time,
+  row_number() over (partition by user_id order by p_time) as row_num
+from t
+) tmp
+where row_num = 3

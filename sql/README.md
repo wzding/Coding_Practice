@@ -20,10 +20,12 @@ time.
 
 # median
 * Weather_Observation_Station_20.sql
+* mean_median.sql
 
 # union
 * Weather_Observation_Station_5.sql
 * Symmetric_Pairs.sql
+* percentage_mobile_web.sql (full outer join)
 
 ## self join
 * self_join.sql
@@ -51,6 +53,7 @@ time.
 
 # window function
 * cume_dist.sql
+* cum_sum.sql
 * first_last_value.sql (first_value + last_value + NTH_VALUE)
 * rank.sql (row_number + dense_rank + rank + percent_rank)
 * lag_lead.sql (lag + lead)
