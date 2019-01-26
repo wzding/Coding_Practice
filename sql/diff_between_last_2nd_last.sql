@@ -14,7 +14,6 @@ LEAD(<expression>[,offset[, default_value]]) OVER (
     ORDER BY (expr)
 )
 
-
 For each user_id, find the difference between the last action and the second
 last action. Action here is defined as visiting a page. If the user has just
 one action, you can either remove her from the final results or keep that
@@ -42,7 +41,7 @@ values (1, "home", 1451640067),
 (4, "home", 1451640090);
 /*
 这里 lag(unix_timestamp, 1) over (partition by user_id order by unix_timestamp)
-等于 lead(unix_timestamp, 1) over (partition by user_id order by unix_timestamp desc) 
+等于 lead(unix_timestamp, 1) over (partition by user_id order by unix_timestamp desc)
 */
 select user_id,
   unix_timestamp - previous_time as diff

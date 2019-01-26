@@ -68,6 +68,10 @@ time.
 # regexp
 * Weather_Observation_Station_6.sql
 
+# update and delete
+* 
+* Delete_Duplicate_Emails.sql
+
 # Resources
 * SQLZOO: Tutorial exercises completed from http://sqlzoo.net/wiki/SQL_Tutorial
 * book: Data Science Interviews Exposed
