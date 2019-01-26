@@ -69,7 +69,7 @@ time.
 * Weather_Observation_Station_6.sql
 
 # update and delete
-* 
+* Swap_Salary.sql
 * Delete_Duplicate_Emails.sql
 
 # Resources
