@@ -101,3 +101,12 @@ FROM
     basic_pays;
 
 -- NTH_VALUE over partition Example
+SELECT
+    employee_name,
+    salary,
+    NTH_VALUE(employee_name, 2) OVER  (
+      PARTITION BY department
+        ORDER BY salary DESC
+    ) second_highest_salary
+FROM
+    basic_pays;

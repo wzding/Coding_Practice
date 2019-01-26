@@ -1,3 +1,14 @@
+create table sales_table (
+  productid INT,
+  sale INT
+);
+
+insert into sales_table (productid, sale) values
+  (1, 4),
+  (2, 3),
+  (6, 9),
+  (7, 7),
+  (8, 4);
 /*
 2nd highest sale
 */
@@ -15,6 +26,11 @@ where 2 = (select count(distinct sale) from sales s2 where s1.sale <= s2.sale)
 kth highest sale
 */
 select sale from
-(select distinct sale from sales order by sale desc limit 2) as s
+(select distinct sale from sales order by sale desc limit 5) as s
 order by sale
+limit 1
+--- use nth_value
+select nth_value(sale, 3) over (order by sale desc) as nth
+from sales_table
+order by nth desc
 limit 1

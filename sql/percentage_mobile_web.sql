@@ -15,7 +15,7 @@ CREATE TABLE t2 (
     page VARCHAR(10) NOT NULL
 );
 
-insert into t1(user_id, page, unix_timestamp)
+insert into t1(user_id, page)
 values (1, "m"),
 (2, "m"),
 (3, "m"),
@@ -24,7 +24,7 @@ values (1, "m"),
 (6, "m"),
 (7, "m");
 
-insert into t2(user_id, page, unix_timestamp)
+insert into t2(user_id, page)
 values (3, "w"),
 (5, "w"),
 (7, "w"),

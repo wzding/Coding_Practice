@@ -9,27 +9,61 @@ summary_table each row is the number of times each clientID
 listened to musicID up to endDate. columns:
 clientID, numPlay, musicID, endDate
 */
+create table music_table (
+  actionid int,
+  clientid int,
+  musicid int,
+  snapshotday timestamp
+);
+
+insert into music_table (actionid, clientid, musicid, snapshotday) values
+(1, 1, 1, '20180101'),
+(2, 2, 1, '20180201'),
+(3, 1, 7, '20180301'),
+(4, 1, 1, '20180402'),
+(5, 3, 1, '20180501'),
+(6, 2, 1, '20180601'),
+(7, 1, 3, '20180701'),
+(8, 4, 4, '20180801');
+
+
+create table summary_table (
+  clientid int,
+  numplay int,
+  musicid int,
+  enddate timestamp
+);
+
+insert into summary_table (clientid, numplay, musicid, enddate) values
+(1, 3, 1, '20180401'),
+(2, 4, 2, '20180201');
 
 /*
 update the summary_table using the music_action table with the latest snapshotDay
 注意 summary_table 可能包含有 music_action  没有的信息 所以要 outer join
 */
-with new_summary as (
 select clientid, musicid,
-  count(actionid) as cnt,
-  max(snapshotday) as enddate
-  from music_action
-  group by clientid, musicid
-)
+count(actionid) as numplay,
+max(snapshotday) as enddate
+from music_table
+group by clientid, musicid
+select * from summary_table;
 
-select new.clientid,
-(new.cnt + old.numplay) as numplay,
-new.musicid,
+select n.clientid,
 case
-  when (old.enddate is null or old.enddate < new.enddate) then new.enddate
-  else old.enddate
-  end as enddate
-from new_summary new
-left outer join summary_table old
-on old.clientid = new.clientid and
-old.musicid = new.musicid
+  when s.numplay is not null then s.numplay + n.numplay
+  else n.numplay end as numplay,
+n.musicid,
+case
+  when s.enddate is null or s.enddate < n.enddate then n.enddate
+  else s.enddate end as enddata
+from
+  (select clientid, musicid,
+  count(actionid) as numplay,
+  max(snapshotday) as enddate
+  from music_table
+  group by clientid, musicid) as n
+left outer join summary_table s
+on s.clientid = n.clientid
+and s.musicid = n.musicid
+order by n.clientid, n.enddate

@@ -54,10 +54,11 @@ time.
 
 # window function
 * cume_dist.sql
-* cum_sum.sql
+* com_sum.sql
 * first_last_value.sql (first_value + last_value + NTH_VALUE)
-* rank.sql (row_number + dense_rank + rank + percent_rank)
-* lag_lead.sql (lag + lead)
+* rank.sql (row_number + dense_rank + rank + percent_rank + NTILE)
+  * power user
+* diff_between_last_2nd_last.sql (lag + lead)
 * top_k_sales.sql (row_number + dense_rank)
 
 # complicated logic

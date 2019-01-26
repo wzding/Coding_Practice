@@ -1,4 +1,7 @@
 /*
+find all the jobid that appear at least twice consecutively.
+*/
+
 create table logs (
   timestamp int,
   jobid int
@@ -13,10 +16,10 @@ insert into logs (timestamp, jobid) values
 (6, 2),
 (7, 1),
 (8, 4);
-*/
 
 /* O(n^2) */
-select distinct a.jobid from logs a, logs b
+select distinct a.jobid
+from logs a, logs b
 where b.timestamp = a.timestamp + 1
 and a.jobid = b.jobid
 

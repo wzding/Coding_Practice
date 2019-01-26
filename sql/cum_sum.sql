@@ -45,7 +45,7 @@ VALUES (1,'2014-10-31', 15),
 Write a query that returns the total amount of money spent by each user.
 That is, the sum of the column transaction_amount for each user over both tables.
 */
-SELECT user_id, SUM(transaction_amount)
+SELECT user_id, SUM(transaction_amount) as s
 from (
 (SELECT * FROM march)
 UNION ALL
@@ -65,21 +65,39 @@ GROUP BY user_id
 returns day by day the cumulative sum of money spent by each user. That is,
 each day a user had a transcation, we should have how much money she has spent in total until that day.
 */
-set sql_mode = '';
-SELECT user_id, p_date, SUM(amount) over (
-  partition by user_id order by p_date
-) as total
+
+SELECT user_id,
+  p_date,
+  SUM(amount) over (
+    partition by user_id order by p_date
+  ) as total
 FROM
 (
   (SELECT user_id, p_date,
    sum(transaction_amount) as amount
    FROM march
     group by user_id, p_date)
-UNION ALL
+  UNION ALL
   (SELECT user_id, p_date,
    sum(transaction_amount) as amount
    FROM april
    group by user_id, p_date)
 ) all_data
-GROUP BY user_id, p_date
-ORDER BY user_id, p_date
+order by user_id, p_date;
+
+-- +---------+------------+---------+
+-- | user_id | p_date     | cum_sum |
+-- +---------+------------+---------+
+-- |       1 | 2014-03-10 |       6 |
+-- |       1 | 2014-03-24 |       8 |
+-- |       1 | 2014-03-30 |      59 |
+-- |       1 | 2014-03-31 |      74 |
+-- |       1 | 2014-04-10 |      80 |
+-- |       1 | 2014-04-24 |      82 |
+-- |       1 | 2014-04-30 |     133 |
+-- |       1 | 2014-10-31 |     148 |
+-- |       2 | 2014-03-30 |      13 |
+-- |       3 | 2014-03-30 |      30 |
+-- |      12 | 2014-04-30 |      13 |
+-- |      13 | 2014-04-30 |      30 |
+-- +---------+------------+---------+

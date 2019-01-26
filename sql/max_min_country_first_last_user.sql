@@ -20,7 +20,8 @@ SELECT
   group by country
   having COUNT(user_id) = (
     select max(cnt) from
-    (select count(user_id) as cnt from country_table group by country) max_count
+    (select count(user_id) as cnt from country_table group by country
+    ) max_count
   )
 ) as max_country,
 (
@@ -28,7 +29,8 @@ SELECT
   group by country
   having COUNT(user_id) = (
     select min(cnt) from
-    (select count(user_id) as cnt from country_table group by country) min_count
+    (select count(user_id) as cnt from country_table group by country
+    ) min_count
   )
 ) as min_country;
 -- +-------------+-------------+
@@ -86,7 +88,8 @@ from
   select *,
   row_number() over(partition by country order by created_at) as row_a,
   row_number() over(partition by country order by created_at desc) as row_b
-  from country_table) tmp
+  from country_table
+) tmp
   where row_a = 1 or row_b = 1;
 -- +---------+---------------------+---------+
 -- | user_id | created_at          | country |
