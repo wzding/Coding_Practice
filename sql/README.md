@@ -9,7 +9,7 @@ SQL Server, Oracle, MySQL, DB2, and PostgreSQL.
 
 ## local variable + information_schema.tables
 
-Note that if set local variable in front, such as set @r1 := 0, : can be ignored.
+Note that if set local variable in front, such as set @r1 := 0; then ":" can be ignored.
 But if set in a table, : can not be ignored. It's better to just keep : all the
 time.
 
@@ -34,7 +34,7 @@ time.
 * no_sales.sql
 
 ## Top numbers
-* kth_highest_sales.sql
+* Nth_highest_sales.sql
 * Top_Earners.sql (count of max)
 * Contest_Leaderboard.sql (sum of max)
 * Ollivander's_Inventory.sql (other attributes with min)
@@ -71,6 +71,9 @@ time.
 # update and delete
 * Swap_Salary.sql
 * Delete_Duplicate_Emails.sql
+
+# ratios
+* GetHighestAnswerRateQuestion.sql
 
 # Resources
 * SQLZOO: Tutorial exercises completed from http://sqlzoo.net/wiki/SQL_Tutorial

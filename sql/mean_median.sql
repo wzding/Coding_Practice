@@ -1,7 +1,6 @@
 /*
 Find the average and median transaction amount only considering those
 transactions that happen on the same date as that user signed-up.
-
 */
 CREATE TABLE user (
     user_id INT NOT NULL,
@@ -42,3 +41,57 @@ FROM (
   ON transaction_table.user_id = user.user_id AND
   DATE(transaction_table.transaction_date) = user.sign_up_date
 ) tmp;
+
+/*
+知道frequency 并不是单独的数字
+不用 window functions
+必须 consider previous cumulative frequency
+https://leetcode.com/problems/find-median-given-frequency-of-numbers/
+*/
+CREATE TABLE numbers (
+    number INT NOT NULL,
+    frequency INT NOT NULL
+);
+
+INSERT INTO numbers(number, frequency)
+VALUES (0,7),
+(1,1),
+(2,3),
+(3,1);
+
+select avg(number) as median
+from (
+    select *,
+    @prev := @curr as prev,
+    @curr := @prev + frequency as curr,
+    (select sum(frequency) from numbers) as total
+    from numbers,
+    (select @curr := 0, @prev := 0) init
+    order by number
+) tmp
+where curr >= floor((total+1)/2)
+and prev <= total - floor((total+1)/2)
+
+/*
+延伸一下 求 median salary at each company
+https://leetcode.com/problems/median-employee-salary/
+*/
+select Id, tmp.Company, Salary
+from (
+    select *,
+    @curr := if(@prev = Company, @curr := @curr + 1, 1) as rank_num,
+    @prev := Company
+    from
+    Employee,
+    (select @curr := 1, @prev := Null) init
+    order by Company, Salary
+) tmp
+left join
+(select Company,
+ count(*) as total
+ from Employee
+ group by Company
+) cnt
+on tmp.Company = cnt.Company
+where total % 2 = 0 and rank_num between total / 2 and total / 2 + 1
+or total % 2 = 1 and rank_num = (total + 1) / 2
