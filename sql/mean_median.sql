@@ -119,7 +119,7 @@ or total % 2 = 1 and rank_num = (total + 1) / 2
 /*
 知道frequency 并不是单独的数字
 不用 window functions
-必须 consider previous cumulative frequency
+必须 calculate previous cumulative frequency
 https://leetcode.com/problems/find-median-given-frequency-of-numbers/
 */
 CREATE TABLE numbers (
@@ -135,7 +135,7 @@ VALUES (0,7),
 
 select avg(number) as median
 from (
-    select *,
+    select number,
     @prev := @curr as prev,
     @curr := @prev + frequency as curr,
     (select sum(frequency) from numbers) as total

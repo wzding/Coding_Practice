@@ -8,7 +8,6 @@ SQL Server, Oracle, MySQL, DB2, and PostgreSQL.
 * create_table.sql
 
 ## local variable + information_schema.tables
-
 Note that if set local variable in front, such as set @r1 := 0; then ":" can be ignored.
 But if set in a table, : can not be ignored. It's better to just keep : all the
 time.
@@ -54,7 +53,7 @@ time.
 
 # window function
 * cume_dist.sql
-* com_sum.sql
+* cum_sum.sql
 * first_last_value.sql (first_value + last_value + NTH_VALUE)
 * rank.sql (row_number + dense_rank + rank + percent_rank + NTILE)
   * power user
@@ -74,6 +73,8 @@ time.
 
 # ratios
 * GetHighestAnswerRateQuestion.sql
+* Friend_Requests_I.sql
+* TripsandUsers.sql
 
 # Resources
 * SQLZOO: Tutorial exercises completed from http://sqlzoo.net/wiki/SQL_Tutorial
