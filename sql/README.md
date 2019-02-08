@@ -5,7 +5,7 @@ SQL Server, Oracle, MySQL, DB2, and PostgreSQL.
 # Categorization
 
 # creation
-1. create_table.sql
+* create_table.sql
 
 ## local variable + information_schema.tables
 Note that if set local variable in front, such as set @r1 := 0; then ":" can be ignored.
