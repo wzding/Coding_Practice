@@ -4,7 +4,7 @@ SQL Server, Oracle, MySQL, DB2, and PostgreSQL.
 
 # Categorization
 
-# creation
+## creation
 * create_table.sql
 
 ## local variable + information_schema.tables
@@ -17,11 +17,11 @@ time.
 * Projects.sql
 * Draw_The_Triangle.sql
 
-# median
+## median
 * Weather_Observation_Station_20.sql
 * mean_median.sql
 
-# union
+## union
 * Weather_Observation_Station_5.sql
 * Symmetric_Pairs.sql
 * percentage_mobile_web.sql (full outer join)
@@ -48,39 +48,39 @@ time.
 * The_PADS.sql
 * prime_number.sql
 
-# pivot_table
+## pivot_table
 * count_User_Items.sql
 * Occupations.sql
 
-# window function
+## window function
 * cume_dist.sql
 * cum_sum.sql
 * first_last_value.sql (first_value + last_value + NTH_VALUE)
 * rank.sql (row_number + dense_rank + rank + percent_rank + NTILE)
-  * power user
+* power user
 * diff_between_last_2nd_last.sql (lag + lead)
 * top_k_sales.sql (row_number + dense_rank)
 
-# complicated logic
+## complicated logic
 * 15_Days_of_Learning_SQL.sql
 * Interviews.sql (join + left join)
 
-# regexp
+## regexp
 * Weather_Observation_Station_6.sql
 
-# update and delete
+## update and delete
 * Swap_Salary.sql
 * Delete_Duplicate_Emails.sql
 
-# ratios
+## ratios
 * GetHighestAnswerRateQuestion.sql
 * Friend_Requests_I.sql
 * TripsandUsers.sql
 
-# by company
+## by company
 * twitter.sql
 
-# Resources
+## Resources
 * SQLZOO: Tutorial exercises completed from http://sqlzoo.net/wiki/SQL_Tutorial
 * book: Data Science Interviews Exposed
 * hackerrank: https://www.hackerrank.com/domains/sql  
