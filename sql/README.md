@@ -5,7 +5,7 @@ SQL Server, Oracle, MySQL, DB2, and PostgreSQL.
 # Categorization
 
 # creation
-* create_table.sql
+1. create_table.sql
 
 ## local variable + information_schema.tables
 Note that if set local variable in front, such as set @r1 := 0; then ":" can be ignored.
@@ -44,8 +44,9 @@ time.
 * music_action.sql
 * type_of_triangle.sql
 
-## concat
+## concat + group_concat
 * The_PADS.sql
+* prime_number.sql
 
 # pivot_table
 * count_User_Items.sql
