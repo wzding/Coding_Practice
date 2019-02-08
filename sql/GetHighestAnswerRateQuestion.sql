@@ -6,13 +6,11 @@ https://leetcode.com/problems/get-highest-answer-rate-question/
 
 select question_id as survey_log
 from (
-    select
-    question_id,
-    sum(case action when 'answer' then 1 else 0 end
-    ) / sum(
-      case action when 'show' then 1 else 0 end) as ratio
+    select question_id,
+    sum(case when action = 'answer' then 1 else 0 end) as answers,
+    sum(case when action = 'show' then 1 else 0 end) as shows
     from survey_log
     group by question_id
-) tmp
-order by ratio desc
+) s
+order by answers/shows desc
 limit 1

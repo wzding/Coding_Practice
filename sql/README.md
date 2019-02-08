@@ -76,6 +76,9 @@ time.
 * Friend_Requests_I.sql
 * TripsandUsers.sql
 
+# by company
+* twitter.sql
+
 # Resources
 * SQLZOO: Tutorial exercises completed from http://sqlzoo.net/wiki/SQL_Tutorial
 * book: Data Science Interviews Exposed
