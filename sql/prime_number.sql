@@ -6,6 +6,8 @@ your separator (instead of a space).
 why use information_schema.tables twice?
 Because information_schema.tables has less than 1000 rows.
 so i need to multiply two (or more) tables with more than sqrt(1000)=32 rows
+https://www.hackerrank.com/challenges/print-prime-numbers/problem
+
 */
 select group_concat(b separator '&')
 from (select @num := @num + 1 as b
@@ -18,5 +20,5 @@ where b <= 1000 and not exists
     from information_schema.tables t1,
      information_schema.tables t2,
      (select @nu := 1) tmp2) table2
- where a > 1 and a < b and floor(b/a) = (b/a)
+ where a > 1 and a < b and b % a = 0
 )
