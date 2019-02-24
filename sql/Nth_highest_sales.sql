@@ -16,11 +16,10 @@ select max(sale) as second_highest_sale
 from sales
 where sale < (select max(sale) from sales)
 -- use offset note that need to use another select
-select (
 select distinct sale
 from sales
 order by sale desc
-limit 1 offset 1) as second_highest_sale;
+limit 1 offset 1
 /*
 kth highest sale --> kth higest means there are k unique numbers that less or equal to this number
 */

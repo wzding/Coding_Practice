@@ -35,6 +35,7 @@ time.
 ## Top numbers
 * Nth_highest_sales.sql
 * Top_Earners.sql (count of max)
+------------------------学到这
 * Contest_Leaderboard.sql (sum of max)
 * Ollivander's_Inventory.sql (other attributes with min)
 * Challenges.sql (max of count  注意不能直接用max(count( )) )
@@ -73,9 +74,9 @@ time.
 * Delete_Duplicate_Emails.sql
 
 ## ratios
+* TripsandUsers.sql
 * GetHighestAnswerRateQuestion.sql
 * Friend_Requests_I.sql
-* TripsandUsers.sql
 
 ## by company
 * twitter.sql

@@ -1,7 +1,10 @@
 /* create 3 tables:
 accounts
 dates
-facts */
+facts
+find a list of all accounts on every day in the last 3 days that
+had no expense
+ */
 
 create table accounts(
   accountid int
@@ -33,13 +36,12 @@ insert into facts (accountid, dateid, revenue) values
   (1, '2018-01-04', 7), (1, '2018-01-05', 4), (1, '2018-01-06', 5),
   (1, '2018-01-08', 4), (2, '2018-01-09', 1), (3, '2018-01-10', 4),
   (1, '2018-01-12', 5), (2, '2018-01-13', 1), (2, '2018-01-14', 1);
-/*
-a list of all accounts on every day in the last 3 days that
-had no expense
-*/
+
+
 select d.dateid, a.accountid
 from dates d
 cross join accounts a
+-- have expense
 left join (
   select distinct facts.accountid, dates.dateid as dateid
   from facts cross join dates

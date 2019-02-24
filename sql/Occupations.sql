@@ -90,6 +90,7 @@ group by row;
 
 -- use IF rather than case
 set @r1 := 0, @r2 := 0, @r3 := 0, @r4 := 0;
+
 select min(Doctor), min(Professor), min(Singer), min(Actor)
 from(
     select case Occupation

@@ -94,6 +94,20 @@ where row_a between row_b - 1 and row_b + 1
 group by Company
 order by Company
 
+-- 既有mean 又有median
+select Company,
+avg(Salary) as mean,
+avg(case when row_a between row_b - 1 and row_b + 1 then Salary
+         else Null end) as median
+from
+(
+  select *,
+  row_number() over (partition by Company order by Salary) as row_a,
+  row_number() over (partition by Company order by Salary desc) as row_b
+  from Employee
+) tmp
+group by Company
+
 -- Not use window function 复杂
 -- 注意题目要求只显示处于中间位置的值 不需要计算最终的median
 select Id, tmp.Company, Salary
@@ -141,6 +155,7 @@ from (
     (select sum(frequency) from numbers) as total
     from numbers,
     (select @curr := 0, @prev := 0) init
+    -- order is important
     order by number
 ) tmp
 where curr >= floor((total+1)/2)
