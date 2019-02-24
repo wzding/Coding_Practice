@@ -21,16 +21,18 @@ insert into t (id, action, times) values
 (2, 'search', 11),
 (1, 'like', 18);
 
+/*
+只需要 3 个变量
+*/
 select id,
-group_concat(action separator ',') as actions
+group_concat(action separator ', ') as actions
 from (
-  select t.*,
-  @diff := abs(times - @prev_time) as diff,
-  @curr := if(@prev_id != id or @diff >= 4, @curr + 1, @curr) as num,
-  @prev_id := id as prev,
-  @prev_time := times as prev_t
+  select *,
+  @num := if(id = @prev_id and times - @prev_time <= 4, @num, @num + 1) as num,
+  @prev_id := id,
+  @prev_time := times
   from t,
-  (select @curr := 0, @diff := Null, @prev_id := Null, @prev_time := 0) init
+  (select @curr := 0, @prev_id := Null, @prev_time := 0) init
   order by id, times
 ) tmp
 group by num, id
@@ -43,18 +45,18 @@ group by num, id
 4,1,1 #depth 1
 5,2,null #depth 0
 6, 1,3# depth 3
-要求output：count depth0，depth1， depth2，depth>=3
+
+要求 output：depth0，depth1，depth2，depth>=3, count
   depth 0： 2
   depth 1: 2
   depth 2: 1
   depth>=3: 1
-需要join三次
 */
+
 create table tweet(
 tweet_id int,
 Con_num int,
 reply_to_tweet int);
-
 insert into tweet values
 (1,1,null),(2,1,1),(3,1,2),(4,1,1),(5,2,null),(6,2,5),(7,1,2),(8,1,7);
 
@@ -87,16 +89,13 @@ group by depth
 create table abuser (
   id int
 );
-
 insert into abuser (id) values
 (1),
 (2),
 (3);
-
 create table user (
   id int
 );
-
 insert into user (id) values
 (1),
 (2),
