@@ -33,47 +33,51 @@ from
 -- cum sum
 (
   select day,
-  sum(req_num) over (order by day) as req_cum_sum,
-  sum(acp_num) over (order by day) as acp_cum_sum
+  sum(case when req_num is null then 0 else req_num end) over (order by day) as req_cum_sum,
+  sum(case when acp_num is null then 0 else acp_num end) over (order by day) as acp_cum_sum
   from
-  -- fill nan
-  (
-      select day,
-      case when req_num is null then 0 else req_num end as req_num,
-      case when acp_num is null then 0 else acp_num end as acp_num
-      from
-      -- all days
-      (
-          (select distinct request_date as day from friend_request)
-          union
-          (select distinct accept_date as day from request_accepted)
-      ) all_date
-      -- join request
-      left join
-      (
-          select request_date,
-          count(distinct sender_id, send_to_id) as req_num
-          from (
-            select sender_id, send_to_id, min(request_date) as request_date
-            from friend_request
-            group by sender_id, send_to_id
-          ) f
-          group by request_date
-      ) req
-      on all_date.day = req.request_date
-      -- join acceptance
-      left join
-      (
-          select accept_date,
-          count(distinct requester_id, accepter_id) as acp_num
-          from (
-            select requester_id, accepter_id, min(accept_date) as accept_date
-            from request_accepted
-            group by requester_id, accepter_id
-          ) r
-          group by accept_date
-      ) acp
-      on all_date.day = acp.accept_date
-      order by day
-  ) fill_nan_table
+    -- all days
+    (
+        (select distinct request_date as day from friend_request)
+        union
+        (select distinct accept_date as day from request_accepted)
+    ) all_date
+    -- join request only count the first request date
+    left join
+    (
+        select request_date,
+        count(distinct sender_id, send_to_id) as req_num
+        from (
+          select sender_id, send_to_id, min(request_date) as request_date
+          from friend_request
+          group by sender_id, send_to_id
+        ) f
+        group by request_date
+    ) request
+    on all_date.day = request.request_date
+    -- join acceptance only count the first acceptance date
+    left join
+    (
+        select accept_date,
+        count(distinct requester_id, accepter_id) as acp_num
+        from (
+          select requester_id, accepter_id, min(accept_date) as accept_date
+          from request_accepted
+          group by requester_id, accepter_id
+        ) r
+        group by accept_date
+    ) accept
+    on all_date.day = accept.accept_date
+    order by day
 ) cum_table
+
+-- +------------+-------------+
+-- | day        | accept_rate |
+-- +------------+-------------+
+-- | 2016-06-01 |        0.00 |
+-- | 2016-06-02 |        0.00 |
+-- | 2016-06-03 |        0.25 |
+-- | 2016-06-08 |        0.75 |
+-- | 2016-06-09 |        0.80 |
+-- | 2016-06-10 |        0.80 |
+-- +------------+-------------+

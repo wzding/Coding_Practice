@@ -5,7 +5,4 @@ Swap all f and m values (i.e., change all f values to m and vice versa) with
 a single update query and no intermediate temp table.
 */
 update salary
-set sex = case sex
-    when 'f' then 'm'
-    when 'm' then 'f'
-    end;
+set sex = case sex when 'f' then 'm' when 'm' then 'f' end;
