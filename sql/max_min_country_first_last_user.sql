@@ -3,7 +3,6 @@ CREATE TABLE country_table (
     created_at TIMESTAMP NOT NULL,
     country VARCHAR(10) NOT NULL
 );
-
 INSERT INTO country_table(user_id, created_at, country)
 VALUES (1,'2014-03-30', 'China'),
 (2,'2014-01-30', 'US'),
@@ -38,17 +37,36 @@ SELECT
 -- +-------------+-------------+
 -- | US          | China       |
 -- +-------------+-------------+
--- 下面的方法也是输出用户最多和最少的国家 但是输出结果有点不同
-select country, s from
-(
-  select country, s,
-  row_number() over(order by s) as row_a,
-  row_number() over(order by s desc) as row_b
+-- 下面 two ways 也是输出用户最多和最少的国家 但是输出结果有点不同
+select country, count(*) as cnt
+from country_table
+group by country
+having cnt = (
+  select count(*)
+  from country_table
+  group by country
+  order by count(*)
+  limit 1
+) or
+cnt =  (
+  select count(*)
+  from country_table
+  group by country
+  order by count(*) desc
+  limit 1
+)
+order by cnt desc
+--- another way use window function
+select country, cnt from (
+  select country, cnt,
+  row_number() over(order by cnt) as row_a,
+  row_number() over(order by cnt desc) as row_b
   from (
     select country,
-    count(distinct user_id) as s
+    count(distinct user_id) as cnt
     from country_table
-    group by country) cnt_table) tmp
+    group by country) cnt_table
+) tmp
   where row_a = 1 or row_b = 1;
 -- +---------+---+
 -- | country | s |
@@ -56,6 +74,8 @@ select country, s from
 -- | US      | 4 |
 -- | China   | 1 |
 -- +---------+---+
+
+
 /* A query that returns for each country the first and the last user who
 signed up (if that country has just one user, it should just return that single user)
 */
