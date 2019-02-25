@@ -2,7 +2,6 @@ CREATE TABLE scores (
     name VARCHAR(20) PRIMARY KEY,
     score INT NOT NULL
 );
-
 INSERT INTO
  scores(name, score)
 VALUES
@@ -21,11 +20,9 @@ VALUES
 Calculates the cumulative distribution of a value in a set of values.
 CUME_DIST() = ROW_NUMBER() / total_rows
  */
-
 SELECT
- name,
-    score,
-    ROW_NUMBER() OVER (ORDER BY score) row_num,
-    CUME_DIST() OVER (ORDER BY score) cume_dist_val
-FROM
- scores;
+name,
+score,
+ROW_NUMBER() OVER (ORDER BY score) row_num,
+CUME_DIST() OVER (ORDER BY score) cume_dist_val
+FROM scores;
