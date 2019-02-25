@@ -33,11 +33,9 @@ the last row in the window frame.
 
 -- Using MySQL FIRST_VALUE() function over the whole query result set example
 SELECT
-    employee_name,
-    hours,
-    FIRST_VALUE(employee_name) OVER (
-        ORDER BY hours
-    ) least_over_time
+  employee_name,
+  hours,
+  FIRST_VALUE(employee_name) OVER (ORDER BY hours) least_over_time
 FROM
     overtime;
 -- Using MySQL FIRST_VALUE() over the partition example
@@ -51,7 +49,6 @@ SELECT
     ) least_over_time
 FROM
     overtime;
-
 
 /*
 The default frame specification is as follows:
@@ -98,7 +95,7 @@ SELECT
         ORDER BY salary DESC
     ) second_highest_salary
 FROM
-    basic_pays;
+    overtime;
 
 -- NTH_VALUE over partition Example
 SELECT
@@ -109,4 +106,4 @@ SELECT
         ORDER BY salary DESC
     ) second_highest_salary
 FROM
-    basic_pays;
+    overtime;
