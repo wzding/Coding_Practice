@@ -35,7 +35,6 @@ time.
 ## Top numbers
 * Nth_highest_sales.sql
 * Top_Earners.sql (count of max)
-------------------------学到这
 * Contest_Leaderboard.sql (sum of max)
 * Ollivander's_Inventory.sql (other attributes with min)
 * Challenges.sql (max of count  注意不能直接用max(count( )) )
@@ -58,9 +57,7 @@ time.
 * cum_sum.sql
 * first_last_value.sql (first_value + last_value + NTH_VALUE)
 * rank.sql (row_number + dense_rank + rank + percent_rank + NTILE)
-* power user
 * diff_between_last_2nd_last.sql (lag + lead)
-* top_k_sales.sql (row_number + dense_rank)
 
 ## complicated logic
 * 15_Days_of_Learning_SQL.sql
