@@ -1,3 +1,13 @@
+————————————————————————————————————————————————————————————————————————————————————
+AWS
+# Install a few things at EC2 instance
+sudo apt install python3-pip
+sudo pip3 install virtualenv
+sudo pip3 install virtualenvwrapper
+Follow this Mkvirtualenv py3
+Install jupyter notebook
+————————————————————————————————————————————————————————————————————————————————————
+
 Conda
 conda env create -f environment.yml
 
@@ -86,8 +96,12 @@ git checkout -b <branch>
 Jupyter
 Ssh
 https://coderwall.com/p/ohk6cg/remote-access-to-ipython-notebooks-via-ssh
+
 remote_user@remote_host$ jupyter notebook --no-browser --port=8889
+
 local_user@local_host$ ssh -N -f -L localhost:4444:localhost:8889 remote_user@remote_host
+If need private key --> ssh -i cousera_homework.pem -N -f -L localhost:4444:localhost:8888 ubuntu@ec2-54-224-104-142.compute-1.amazonaws.com
+
 Specify port: ssh -N -f -L localhost:1234:localhost:8888 -p 55555 emma@24.6.218.37
 To close the SSH tunnel on the local machine, look for the process and kill it manually:
 jupyter notebook list
@@ -127,13 +141,18 @@ Nohup python3 <file.py> &
 ————————————————————————————————————————————————————————————————————————————————————
 
 Spark
+
 Run script on cluster:
 sudo -u hdfs /usr/bin/spark-submit --master yarn --deploy-mode cluster sample.py
 sudo -u hdfs /usr/bin/spark-submit --master local[*] process-actual-demand_1.py --file_path "HistoricalSalesOrderShipment/fake_old.csv" --output_path "test"
 spark-submit --master yarn --deploy-mode cluster --conf spark.yarn.submit.waitAppCompletion=true --num-executors 2 --executor-cores 14 --driver-memory 3g --executor-memory 45g --properties-file /opt/elementum/spark-defaults-int.conf s3://elementum-r9-stage/calceta/spark/src/es_data_extraction_spark/run_all_jenkins_spark.py 20180610 20180611
+
 step function
 aws emr add-steps --region us-east-1 --cluster-id j-1I76SLBICAZWW  --steps Type=spark,Name=spark_calceta_ml,Args=[--master,yarn,--deploy-mode,cluster,--conf,spark.yarn.submit.waitAppCompletion=true,--num-executors,2,--executor-cores,14,--driver-memory,3g,--executor-memory,45g,--properties-file,/opt/elementum/spark-defaults-int.conf,s3://elementum-r9-stage/calceta/spark/src/es_data_extraction_spark/run_all_jenkins_spark.py,20180501,20180502,calceta/spark/test_0612_airflow/],ActionOnFailure=CONTINUE
-Pyspark
+
+Pyspark 
+Install https://blog.sicara.com/get-started-pyspark-jupyter-guide-tutorial-ae2fe84f594f?gi=618953d64b93
+
 Pip install pyspark
 python3 -m pip install ipykernel
 python3 -m ipykernel install --user
@@ -161,8 +180,14 @@ export PYSPARK_DRIVER_PYTHON=/usr/bin/python3
 tar -xzf file.tar.gz
 
 ————————————————————————————————————————————————————————————————————————————————————
+# Set up virtual environment
 
-Virtual environment
+# 在本地上
+mkvirtualenv -p python2.7 py2
+mkvirtualenv -p python3.7 py3
+pip install -r requirements.txt
+
+# 在远程机器上
 PATH=$WORKSPACE/venv/bin:/usr/local/bin:$PATH
 
 if [ ! -f verify_calcETA_data/bin/activate ]; then
@@ -182,3 +207,6 @@ pip install boto
 pip install boto3
 pip install -U --force sklearn
 pip install pyspark
+
+或者 pip install -r requirements.txt
+
